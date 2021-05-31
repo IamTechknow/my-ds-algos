@@ -9,6 +9,7 @@
   "author": "Edmond Lee",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^7.27.0"
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb": "^18.2.1"
   }
 }
