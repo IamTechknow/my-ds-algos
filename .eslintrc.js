@@ -12,5 +12,7 @@ module.exports = {
     'linebreak-style': 'off',
     'no-underscore-dangle': 'off',
     'no-plusplus': 'off',
+    'no-param-reassign': 'off',
+    'import/prefer-default-export': 'off',
   },
 };
