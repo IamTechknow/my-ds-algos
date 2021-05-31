@@ -6,7 +6,7 @@ export default class QueueWithObject {
   }
 
   enqueue(val) {
-    this.items[this.end += 1] = val;
+    this.items[this.end++] = val;
   }
 
   dequeue() {
