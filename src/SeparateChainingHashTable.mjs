@@ -1,21 +1,26 @@
 import { stringHashFunction } from './utils/Utils.mjs';
+import LinkedList from './LinkedList.mjs';
 
 const MAX_BUCKET_SIZE = 10;
 const MIN_RESIZE_THRESHOLD = 16;
 
-// TODO: Refactor to use an actual linked list class before implementing remove()
+// TODO: Implement remove()
 export default class SeparateChainingHashTable {
   constructor() {
     this.numBuckets = 8;
     this.size = 0;
     this.buckets = new Array(this.numBuckets);
+    for (let i = 0; i < this.numBuckets; i += 1) {
+      this.buckets[i] = new LinkedList();
+    }
   }
 
   get(key) {
     const bucket = this._getHashIndex(key);
-    for (let curr = this.buckets(bucket); curr != null; curr = curr.next) {
-      if (curr.key === key) {
-        return curr.value;
+    const list = this.buckets[bucket];
+    for (let curr = list.head; curr != null; curr = curr.next) {
+      if (curr.val.key === key) {
+        return curr.val.val;
       }
     }
     return null;
@@ -24,19 +29,20 @@ export default class SeparateChainingHashTable {
   put(key, val) {
     this._checkToEnlarge();
     const bucket = this._getHashIndex(key);
-    for (let curr = this.buckets(bucket); curr != null; curr = curr.next) {
-      if (curr.key === key) {
-        curr.val = val;
+    const list = this.buckets[bucket];
+    for (let curr = list.head; curr != null; curr = curr.next) {
+      if (curr.val.key === key) {
+        curr.val.val = val;
         this.size++;
         return;
       }
     }
-    this.buckets[bucket] = {
-      key,
-      val,
-      next: this.buckets[bucket],
-    };
+    list.addToTail({ key, val });
     this.size++;
+  }
+
+  size() {
+    return this.size();
   }
 
   _getHashIndex(key) {
@@ -63,21 +69,17 @@ export default class SeparateChainingHashTable {
   _resize(isIncreasing) {
     const cache = [];
     for (let i = 0; i < this.numBuckets; i++) {
-      for (let node = this.buckets[i]; node !== null; node = node.next) {
+      for (let node = this.buckets[i].head; node !== null; node = node.next) {
         cache.push(node);
       }
     }
 
-    if (isIncreasing) {
-      this.numBuckets *= 2;
-    } else {
-      this.numBuckets /= 2;
-    }
-
+    this.numBuckets = isIncreasing ? this.numBuckets * 2 : this.numBuckets >> 1;
     this.buckets = new Array(this.numBuckets);
-    for (let i = 0; i < this.numBuckets; i++) {
-      this.buckets[i] = [];
+    for (let i = 0; i < this.numBuckets; i += 1) {
+      this.buckets[i] = new LinkedList();
     }
+    this.size = 0;
     cache.forEach((node) => {
       const { key, value } = node;
       this.put(key, value);
