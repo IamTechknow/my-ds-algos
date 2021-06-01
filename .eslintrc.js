@@ -14,5 +14,6 @@ module.exports = {
     'no-plusplus': 'off',
     'no-param-reassign': 'off',
     'import/prefer-default-export': 'off',
+    'no-bitwise': 'off',
   },
 };
