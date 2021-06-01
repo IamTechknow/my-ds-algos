@@ -15,5 +15,6 @@ module.exports = {
     'no-param-reassign': 'off',
     'import/prefer-default-export': 'off',
     'no-bitwise': 'off',
+    'max-classes-per-file': ['error', 2],
   },
 };
