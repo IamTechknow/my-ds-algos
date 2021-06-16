@@ -19,6 +19,10 @@ export default class QueueWithObject {
     return val;
   }
 
+  peek() {
+    return this.items[this.start];
+  }
+
   size() {
     return this.end - this.start;
   }

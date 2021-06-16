@@ -19,6 +19,10 @@ export default class StackWithArray {
     return val;
   }
 
+  peek() {
+    return this.data[this.length];
+  }
+
   size() {
     return this.length;
   }

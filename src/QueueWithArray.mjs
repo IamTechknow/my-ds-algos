@@ -14,6 +14,10 @@ export default class QueueWithArray {
     return this.items.shift();
   }
 
+  peek() {
+    return this.data[0];
+  }
+
   size() {
     return this.items.length;
   }
