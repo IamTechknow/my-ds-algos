@@ -30,7 +30,7 @@ export default class Trie {
     return node;
   }
 
-  _getHelper(node, key, d) {
+  _getHelper(node, key, d = 0) {
     if (node == null) {
       return null;
     }
