@@ -1,16 +1,29 @@
 export default class UndirectedGraph {
-  constructor(V) {
-    this.V = V;
+  constructor() {
+    this.V = 0;
     this.E = 0;
-    this.adj = new Array(V);
-    for (let i = 0; i < V; i += 1) {
-      this.adj[i] = [];
+    this.adj = {};
+  }
+
+  addVertex(vertex) {
+    if (this.includes(vertex)) {
+      return;
     }
+    this.adjacent[vertex] = [];
+    this.V++;
+  }
+
+  includes(vertex) {
+    return this.adjacent[vertex] !== undefined;
   }
 
   addEdge(v, w) {
+    if (!this.includes(v) || !this.includes(w) || this.adjacent[v].includes(w)) {
+      return;
+    }
     this.adj[v].push(w);
     this.adj[w].push(v);
+    this.E++;
   }
 
   getAdjacentEdges(v) {
