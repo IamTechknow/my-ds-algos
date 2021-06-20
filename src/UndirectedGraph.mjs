@@ -30,6 +30,10 @@ export default class UndirectedGraph {
     return this.adj[v];
   }
 
+  degree(v) {
+    return this.adj[v].length;
+  }
+
   V() {
     return this.V;
   }

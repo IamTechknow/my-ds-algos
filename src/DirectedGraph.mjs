@@ -3,6 +3,7 @@ export default class DirectedGraph {
     this.V = 0;
     this.E = 0;
     this.adj = {};
+    this.indegree = {};
   }
 
   addVertex(vertex) {
@@ -22,11 +23,16 @@ export default class DirectedGraph {
       return;
     }
     this.adj[v].push(w);
+    this.indegree[w] = this.indegree[w] !== null ? this.indegree[w] : 1;
     this.E++;
   }
 
   getAdjacentEdges(v) {
     return this.adj[v];
+  }
+
+  indegree(v) {
+    return this.indegree[v];
   }
 
   V() {
