@@ -2,6 +2,7 @@ export default class DoublyLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
+    this.size = 0;
   }
 
   addToHead(value) {
@@ -14,6 +15,7 @@ export default class DoublyLinkedList {
       this.head.prev = newNode;
       this.head = newNode;
     }
+    this.size += 1;
   }
 
   addToTail(value) {
@@ -26,6 +28,21 @@ export default class DoublyLinkedList {
       newNode.prev = this.tail;
       this.tail = newNode;
     }
+    this.size += 1;
+  }
+
+  removeFromHead() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.deleteAtIndex(0);
+  }
+
+  removeFromTail() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.deleteAtIndex(this.size - 1);
   }
 
   addAtIndex(index, value) {
@@ -47,13 +64,16 @@ export default class DoublyLinkedList {
     if (newNode.next === null) {
       this.tail = newNode;
     }
+    this.size += 1;
   }
 
   deleteAtIndex(index) {
-    if (index < 0) {
+    if (index < 0 || this.isEmpty()) {
       return null;
     }
-    const curr = this._getNode(index);
+    const curr = index === this.size - 1
+      ? this.tail
+      : this._getNode(index);
     if (curr === null) {
       return null;
     }
@@ -68,10 +88,14 @@ export default class DoublyLinkedList {
     } else {
       next.prev = prev;
     }
+    this.size -= 1;
     return val;
   }
 
   contains(target) {
+    if (this.isEmpty()) {
+      return false;
+    }
     let currNode = this.head;
     while (currNode !== null) {
       if (currNode.val === target) {
@@ -85,6 +109,10 @@ export default class DoublyLinkedList {
   get(index) {
     const node = this._getNode(index);
     return node !== null ? node.val : null;
+  }
+
+  isEmpty() {
+    return this.head === null && this.tail === null;
   }
 
   _getNode(index) {
