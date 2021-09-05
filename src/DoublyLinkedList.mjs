@@ -49,13 +49,13 @@ export default class DoublyLinkedList {
 
   deleteAtIndex(index) {
     if (index < 0) {
-      return;
+      return null;
     }
     const curr = this._getNode(index);
     if (curr === null) {
-      return;
+      return null;
     }
-    const { next, prev } = curr;
+    const { next, prev, val } = curr;
     if (prev !== null) {
       prev.next = next;
     } else {
@@ -66,6 +66,7 @@ export default class DoublyLinkedList {
     } else {
       next.prev = prev;
     }
+    return val;
   }
 
   contains(target) {
