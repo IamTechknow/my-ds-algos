@@ -5,24 +5,26 @@ export default class DoublyLinkedList {
   }
 
   addToHead(value) {
+    const newNode = new DoublyLinkedList.Node(value);
     if (this.head === null) {
-      this.head = new DoublyLinkedList.Node(value);
+      this.head = newNode;
       this.tail = this.head;
     } else {
-      const newHead = new DoublyLinkedList.Node(value, this.head);
-      this.head.next.prev = newHead;
-      this.head = newHead;
+      newNode.next = this.head;
+      this.head.prev = newNode;
+      this.head = newNode;
     }
   }
 
   addToTail(value) {
+    const newNode = new DoublyLinkedList.Node(value);
     if (this.tail === null) {
-      this.tail = new DoublyLinkedList.Node(value);
+      this.tail = newNode;
       this.head = this.tail;
     } else {
-      this.tail.next = new DoublyLinkedList.Node(value);
-      this.tail.prev.next = this.tail.next;
-      this.tail = this.tail.next;
+      this.tail.next = newNode;
+      newNode.prev = this.tail;
+      this.tail = newNode;
     }
   }
 
