@@ -10,20 +10,21 @@ export default class DirectedGraph {
     if (this.includes(vertex)) {
       return;
     }
-    this.adjacent[vertex] = [];
+    this.adj[vertex] = [];
+    this.indegree[vertex] = [];
     this.V++;
   }
 
   includes(vertex) {
-    return this.adjacent[vertex] !== undefined;
+    return this.adj[vertex] !== undefined;
   }
 
   addEdge(v, w) {
-    if (!this.includes(v) || !this.includes(w) || this.adjacent[v].includes(w)) {
+    if (!this.includes(v) || !this.includes(w) || this.adj[v].includes(w)) {
       return;
     }
     this.adj[v].push(w);
-    this.indegree[w] = this.indegree[w] !== null ? this.indegree[w] : 1;
+    this.indegree[w] += 1;
     this.E++;
   }
 
