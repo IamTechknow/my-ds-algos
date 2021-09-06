@@ -3,9 +3,9 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: 'airbnb',
+  extends: 'airbnb-base',
   parserOptions: {
-    ecmaVersion: 12,
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
   rules: {
@@ -14,6 +14,7 @@ module.exports = {
     'no-plusplus': 'off',
     'no-param-reassign': 'off',
     'no-restricted-syntax': 'off',
+    'import/extensions': 'off',
     'import/prefer-default-export': 'off',
     'no-bitwise': 'off',
     'max-classes-per-file': ['error', 2],
