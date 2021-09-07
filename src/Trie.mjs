@@ -9,16 +9,16 @@ export default class Trie {
 
   get(key) {
     const node = this._getHelper(this.root, key);
-    return node != null ? node.val : null;
+    return node !== null ? node.val : null;
   }
 
   startsWith(prefix) {
     const node = this._getHelper(this.root, prefix);
-    return node != null;
+    return node !== null;
   }
 
   _putHelper(node, key, val, d = 0) {
-    if (node == null) {
+    if (node === null) {
       node = new Trie.Node();
     }
     if (d === key.length) {
@@ -26,19 +26,19 @@ export default class Trie {
       return node;
     }
     const ch = key[d];
-    node.next[ch] = this._putHelper(node.next[ch], key, val, d + 1);
+    node.next[ch] = this._putHelper(node.next[ch] ?? null, key, val, d + 1);
     return node;
   }
 
   _getHelper(node, key, d = 0) {
-    if (node == null) {
+    if (node === null) {
       return null;
     }
     if (d === key.length) {
       return node;
     }
     const ch = key[d];
-    return this._getHelper(node.next[ch], key, d + 1);
+    return this._getHelper(node.next[ch] ?? null, key, d + 1);
   }
 }
 

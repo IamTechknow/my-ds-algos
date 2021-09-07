@@ -21,7 +21,7 @@ export default class LRUCache {
 
   get(key) {
     const node = this.nodeCache[key] || null;
-    if (node == null) {
+    if (node === null) {
       return null;
     }
     this._moveToHead(node);
@@ -30,7 +30,7 @@ export default class LRUCache {
 
   put(key, value) {
     const node = this.nodeCache[key] || null;
-    if (node != null) {
+    if (node !== null) {
       node.val.value = value;
       this._moveToHead(node);
       return;
